@@ -46,7 +46,13 @@ http
           .pipe(ss)
           .pipe(res)
           .on('finish', function () {
-            console.log(Math.round(ss.average * 1000 / 1024 * 100) / 100);
+            var record = {
+              average: Math.round(ss.average * 1000 / 1024 * 100) / 100,
+              ip: req.connection.remoteAddress
+            };
+
+            console.log(JSON.stringify(record));
+
             res.end();
           });
       })
